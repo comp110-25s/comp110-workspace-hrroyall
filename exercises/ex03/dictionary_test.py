@@ -5,6 +5,7 @@ __author__: str = "730576361"
 from dictionary import invert
 from dictionary import favorite_color
 from dictionary import count
+from dictionary import bin_len
 
 import pytest
 
@@ -17,11 +18,8 @@ import pytest
 def test_invert_keyerror() -> None:
     """Tests for an invert function that raises a KeyError."""
     with pytest.raises(KeyError):
-        my_dictionary = {
-            "fruit": "apple",
-            "snack": "apple",
-        }
-        invert(my_dictionary)
+        dictionary_1 = {"fruit": "apple", "snack": "apple"}
+        invert(dictionary_1)
 
 
 def test_invert_foods() -> None:
@@ -102,3 +100,24 @@ def test_favorite_color_duplicate() -> None:
     }
     assert favorite_color(color_dictionary) == "purple"
     """The color that is chosen to win the tie is the one that appeared first."""
+
+
+"""3x Unit Tests for bin_len function"""
+
+
+def test_bin_len_empty() -> None:
+    """Tests a bin_len function containing an empty list."""
+    list_of_things: list[str] = []
+    assert bin_len(list_of_things) == {}
+
+
+def test_bin_len_animals() -> None:
+    """Tests a bin_len function using a list of animals."""
+    list_of_things: list[str] = ["bear", "duck", "owl", "pig"]
+    assert bin_len(list_of_things) == {4: {"bear", "duck"}, 3: {"owl", "pig"}}
+
+
+def test_bin_len_duplicates() -> None:
+    """Tests a bin_len function using a list containing a duplicate."""
+    list_of_things: list[str] = ["the", "the", "fox"]
+    assert bin_len(list_of_things) == {3: {"the", "fox"}}

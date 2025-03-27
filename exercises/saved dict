@@ -1,24 +1,15 @@
-"""This is EX03: The Dictionary Functions Exercise! This file is used for functions."""
-
-__author__: str = "730576361"
-
-
 def invert(dictionary_1: dict[str, str]) -> dict[str, str]:
-    """This function will switch the keys and values in a new dictionary"""
     inverted_dictionary: dict[str, str] = {}
     for key in dictionary_1:
         value = dictionary_1[key]
         inverted_dictionary[value] = key
-        if value == key:
-            raise KeyError(
-                "This word is cannot be listed more than once in the new dictionary!"
-            )
+        if value in inverted_dictionary:
+            raise KeyError
         inverted_dictionary[value] = key
     return inverted_dictionary
 
 
 def count(list_of_something: list[str]) -> dict[str, int]:
-    """This function will tally up how many times an item is repeated in a list"""
     final_count: dict[str, int] = {}
     for key in list_of_something:
         if key in final_count:
@@ -29,7 +20,6 @@ def count(list_of_something: list[str]) -> dict[str, int]:
 
 
 def favorite_color(color_dictionary: dict[str, str]) -> str:
-    """This function will find the most popular color based on a dictionary"""
     a: int = 0
     most_popular_color = str()
     counts_of_colors: dict[str, int] = {}
@@ -46,13 +36,28 @@ def favorite_color(color_dictionary: dict[str, str]) -> str:
     return most_popular_color
 
 
-def bin_len(list_of_things: list[str]) -> dict[int, set[str]]:
-    set_of_items: set[str] = {""}
+def bin_len(list_of_things: list[str]) -> dict[int, str]: 
     bin_of_str: dict[int, set[str]] = {}
-    for item in list_of_things:
-        length = len(item)
-        if length in bin_of_str:
-            set_of_items.add(item)
-        else:
-            bin_of_str[length] = {item}
-    return bin_of_str
+    
+   
+    for key in list_of_things: 
+        value = list_of_things[key]
+        bin_of_str[value] = key
+        if len(key)
+
+"""3x Unit Tests for bin_len function"""
+
+    def test_bin_len_empty() -> None:
+        """Tests a bin_len function containing an empty list."""
+        list_of_things: list[str] = []
+        assert bin_len(list_of_things) == {}
+
+    def test_bin_len_animals() -> None:
+        """Tests a bin_len function using a list of animals."""
+        list_of_things: list[str] = ["bear", "duck", "owl", "pig"]
+        assert bin_len(list_of_things) == {4: {"bear", "duck"}, 3: {"owl", "pig"}}
+
+    def test_bin_len_duplicates() -> None:
+        """Tests a bin_len function using a list containing a duplicate."""
+        list_of_things: list[str] = ["the", "the", "fox"]
+        assert bin_len(list_of_things) == {3: {"the", "fox"}}
